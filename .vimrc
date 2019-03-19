@@ -103,10 +103,11 @@ endfunction
 "iabbrev i inch 
 "iabbrev d depot 
 "iabbrev ls loading station
-tatus bar colors
+
+"status bar colors
 au InsertEnter *hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
 au InsertLeave *hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+hi statusline guifg=black guibg=#8fbfdc ctermfg=gray ctermbg=DarkCyan
 
 " Status line
 " default: set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
@@ -114,16 +115,16 @@ hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
 " Status Line Custom
 let g:currentmode={
 \ 'n'  : 'Normal',
-\ 'no' :'Normal五务屋Operator Pending',
+\ 'no' : 'Normal Mode Operator Pending',
 \ 'v'  : 'Visual',
-\ 'V'  : 'V五务屋Line',
-\ '^V' : 'V五务屋Block',
+\ 'V'  : 'Visual Line',
+\ '^V' : 'Visual Block',
 \ 's'  : 'Select',
-\ 'S'  : 'S五务屋Line',
-\ '^S' : 'S五务屋Block',
+\ 'S'  : 'Select Line',
+\ '^S' : 'Select Block',
 \ 'i'  : 'Insert',
 \ 'R'  : 'Replace',
-\ 'Rv' : 'V五务屋Replace',
+\ 'Rv' : 'Visual Replace',
 \ 'c'  : 'Command',
 \ 'cv' : 'Vim Ex',
 \ 'ce' : 'Ex',
@@ -139,14 +140,14 @@ set noshowmode
 set statusline=
 set statusline+=%0*\ %n\                                 " Buffer number
 set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
-set statusline+=%3*吾矽西                                     " Separator
+set statusline+=%3*/                                     " Separator
 set statusline+=%2*\ %Y\                                 " FileType
-set statusline+=%3*吾矽西                                     " Separator
+set statusline+=%3*/                                     " Separator
 set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
 set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
 set statusline+=%=                                       " Right Side
 set statusline+=%2*\ col:\ %02v\                         " Colomn number
-set statusline+=%3*吾矽西                                     " Separator
+set statusline+=%3*/                                     " Separator
 set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
