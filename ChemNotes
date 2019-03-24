@@ -1,0 +1,52 @@
+#equilibrium
+equilibrium: reversible reaction, same rate both ways
+-ex N2O4(g) <=> 2NO2(g)
+equilibrium constant expression: [Kc] ratio of concentrations wrt to rates
+-ex N2O4(g) <=> 2NO2(g) -> Kc = [NO2}^2/[N2O4]
+raised to power of order, multiplied by side, reactants/products.
+Kp: Kc wrt to partial pressure rather than concentration
+Kp = Kc(RT)^{\delta n} st R is the universal gas constant, T is temp in Kelvin and \delta n is the change in nubmer of moles (+1 in the prior reaction)
+!pure solids and bases do not get included in calculations
+-ex 2H2O(l) <=> H3O+(aq) = OH-(aq) -> Kc = [H3O+][OH-]
+Ksp: solubility process
+Ka: wrt acid. acid dissociation constant
+Kb: wrt bases
+when reactions are added the constants are multiplied
+
+#Le Chatelier's Principle
+reaction quotient express, Q: same formula as K, but not necc eq conditions.
+Kc = Q -> at eq, Kc < Q -> more reactans, Kc > Q -> more products
+!if placed in alphabetical order points the right way
+Le Chatelier's principle: rules for equilibrium under stress
+factors
+	increase concentration -> shifts to other side
+	increase heat -> favors endothermic side (think of heat as a product)
+	decrease in volume -> side with fewer moles (gaseous only)
+	catalyst -> *not* a factor, same mechanism can be reversed
+
+
+#acids and bases
+acids have pH < 7, bases pH > 7
+acid is strong if fully dissociates, same for base (strong electrolyte)
+pH = -log[H+], pH + pOH = 14
+Arrhenius: Acid and base by H+ and OH- respectively
+Bronstead-Lowry: proton donors vs acceptors
+
+-ex of pH calculation; find pH of following
+0.0015 M HNO3 -> 0.0015 M [H+] -> pH=-log(0.0015)=2.822
+2.5g NaOH in 500 mL of water -> 2.5 g / 40 g = 0.0625 m OH. pOH = -log(0.125M)=0.9. pH + pOH = 14 -> pH = 13.1 
+
+-ex eq for Ka dissolving HF(aq) in water
+Ka = [H3O+][F-]/[HF]
+
+-ex calculate molar concentration of H3O+ in 0.4M HF(aq) (Given Ka = 6.8 * 10^{-4})
+Products change by x
+6.8 * 10^{-4} = x^2/0.4 -> x = 0.16M = [H3O+] = [F-]
+
+
+#titration
+M1V1 = M2V2
+acid   base
+
+4 diff titration curves, graph of pH wrt titrant. Pairwise weak/strong acid/base. Polyprotic acid, w plural protons, two eq points.
+
