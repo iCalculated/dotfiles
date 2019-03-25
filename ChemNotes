@@ -24,11 +24,22 @@ factors
 	decrease in volume -> side with fewer moles (gaseous only)
 	catalyst -> *not* a factor, same mechanism can be reversed
 
+-ex 6CO2(g) + 6H2O(l) <=> C6H12O6(s) + 6O2(g), \delta H = 2880 kJ
+    CO2 addition -> favors right, yes
+    heat increased -> favors right, exothermic side
+    vol of system decreased -> no change, same gaseous moles
+    oxygen gas removed -> favors left, yes
+    glucose removed -> no change, solid, not gas or aq
+    catalyst -> no change, both ways
+    water removed -> no change, not gas or aq 
 
 #acids and bases
 acids have pH < 7, bases pH > 7
 acid is strong if fully dissociates, same for base (strong electrolyte)
 pH = -log[H+], pH + pOH = 14
+kA = [conjugate][H3O+]/[acid]
+Kw=KaKb=1 x 10^{-14} = [H3O+][OH-]
+multiple for polyprotic acids, kA1, kA2...
 Arrhenius: Acid and base by H+ and OH- respectively
 Bronstead-Lowry: proton donors vs acceptors
 
@@ -43,6 +54,13 @@ Ka = [H3O+][F-]/[HF]
 Products change by x
 6.8 * 10^{-4} = x^2/0.4 -> x = 0.16M = [H3O+] = [F-]
 
+#cations and anions
+hydrolysis: reaction with water
+anions are bases and cations are acids, hydrolysis proves
+greater charge and smaller size make a cation more acidic
+anion with conjugate strong acid does not affect pH
+anion with weak acid conjugate -> increase pH
+cation with weak base conjugate -> decrease pH
 
 #titration
 M1V1 = M2V2
