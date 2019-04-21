@@ -1,0 +1,378 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=2cm]{geometry}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{mhchem}
+
+\date{}
+
+\begin{document}
+
+\subsection{Equilbrium}\label{equilbrium}
+
+\hfill{Sasha Hydrie}
+
+\paragraph{Terms:}\label{terms}
+
+\begin{itemize}
+\tightlist
+\item
+  equilibrium eonstant: \(K\)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+Calculated in the same way as \(Q\), but only at equilibrium conditions.
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  reaction quotient: \(Q\)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+For a reaction \ce{aA + bB -> cC + dD}, \(Q=\dfrac{C^cD^d}{A^aB^b}\).
+Remember K to Q comparison, if in alphabetical order the sign points, K
+\textgreater{} Q, reaction favors right.
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  gas pressure constant: \(K_p\)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+Related to \(K_c\) by the formula \(K_p=K_c(RT)^{\Delta n}\), given
+\(\Delta n\) is the difference in moles of gas, products - reactants,
+\(R\) is the ideal gas constant, and \(T\) is temperature in Kelvin.
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  acid dissociation constant: \(K_a\), larger means stronger acid and
+  more dissociation, only for weak acids since strong dissociate
+  entirely.
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+Derived from the reaction \ce{HA -> H^{+} + A^{-}},
+\(K_a=\dfrac{\ce{\lbrack H^{+}\rbrack \lbrack A^{-}\rbrack }}{\ce{\lbrack HA\rbrack }}\)
+equivalent is \ce{HA + H2O -> H3O^{+} + A-}. Also,
+\(\text{p}K_a = -\log{K_a}\)
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  base dissociation constant: \(K_b\)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+Derived from the reaction \ce{HB + H2O -> OH^{-} + BH^{+}},
+\(K_a=\dfrac{\lbrack OH^{-}\rbrack \lbrack BH^{+}\rbrack }{\lbrack B\rbrack }\)
+Also, \(\text{p}K_b = -\log{K_b}\)
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  autoionzation: the process of \ce{2H2O -> H3O^{+} + OH^{-}}
+\item
+  Ion product consant: \(K_w=10^{-14}=K_aK_b\)
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+Equal to \ce{\lbrack H3O^{+}\rbrack \lbrack OH^{-}\rbrack }, hence if
+either ion is known pH can be derived.
+\end{quote}
+\end{quote}
+
+\begin{itemize}
+\item
+  weak acid: only partially dissociates, proton donor
+\item
+  strong acid: completely dissociates, proton donor
+\item
+  weak base: partially dissociates, proton acceptor
+\item
+  strong base: completely dissociates, proton acceptor
+\item
+  conjugate acid base-pairs: differ only by a singel proton, ex:
+  \ce{NH3} and \ce{NH4+}
+\item
+  polyprotic acids: acids that can donate multiple protons, \(K_a\) for
+  the first dissociation is usually the only useful one.
+\item
+  amphoteric: can function as an acid or base, depending on species. ex-
+  water autoionzation.
+\item
+  solubility product constant: \(K_{sp}\) product of ion concentrations.
+\end{itemize}
+
+\begin{quote}
+\begin{quote}
+\(K_{sp}=\text{\lbrack Cation\rbrack \lbrack Anion\rbrack }\), the solid
+is excluded since its concentration is (by definition) 1.
+\end{quote}
+\end{quote}
+
+\paragraph{Le Chatelier's Principle:}\label{le-chateliers-principle}
+
+\textbf{Think about value of Q for each}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Concentration increase → favors opposite side
+\item
+  Pressure increase → favors side with fewer moles of \emph{gas}
+\item
+  Temperature increase → favores endothermic direction
+\item
+  Catalyst → \emph{Nope!} (catalyst speeds up mechanism both ways)
+\item
+  Completely remove solid → favors side with removed solid
+\item
+  Partially remove solid → \emph{Nope!}
+\end{enumerate}
+
+\newpage 
+
+\paragraph{Acids and Bases:}\label{acids-and-bases}
+
+Reactions involving weak acids or bases and water are \emph{reversible},
+while reactions involving strong acids or bases are \emph{not}. As an
+example,
+
+\begin{quote}
+\ce{HCl + H2O -> Cl^{-} + H3O^{+}}
+\end{quote}
+
+note the usage of the single arrow. Comparitively,
+
+\begin{quote}
+\ce{CH3COOH + H2O <-> H3O^{+} + CH3COO^{-}}.
+\end{quote}
+
+Since weak acids and bases do not dissociate completely there are
+factors that effect how much they dissociate. An example would be the
+\textbf{Common Ion Effect:}
+
+\begin{quote}
+weak electrolytes dissociate less when there is a shared ion present, Le
+Chatelier's can be used as justification, looking at the net ionic
+equation.
+\end{quote}
+
+A strong base and a strong acid reacting in equal quantity yields a
+neutral solution:
+
+\begin{quote}
+\ce{HCl + NaOH -> NaCl + H2O}
+\end{quote}
+
+A strong acid reacting with a weak base in equal quantity yields a weak
+acid, making the solution acidic overall:
+
+\begin{quote}
+\ce{HCl + CH3COONa <-> NaCl + CH3COOH}, the reaction is reversible
+because the net ionic equation is \ce{H+ + CH3COO- -> CH3COOH}.
+\end{quote}
+
+The converse is true when a strong base and a weak acid react. Weak
+acids do not react appreciably with weak bases, even in significant
+concentrations. (See \textbf{Buffers}.)
+
+\paragraph{Salts:}\label{salts}
+
+The reaction of an acid and base produces a salt, the anion from the
+acid with the cation from the base. Inherently, cations are proton
+donors and anions are proton acceptors, making them acids and bases
+respectively.
+
+They can be considered conjugate bases or acids, and since they
+correspond to strong acids or bases respectfully they do not dissociate
+meaningfully, and are neutral. The neutral cations are
+
+\begin{quote}
+\ce{Li+}, \ce{Na+}, \ce{K+}, \ce{Rb+}, \ce{Cs+}, \ce{Ca^{2+}}, and
+\ce{Sr^{2+}}
+\end{quote}
+
+and the neutral anions are
+
+\begin{quote}
+\ce{Cl-}, \ce{Br-}, \ce{I-}, \ce{NO3-}, \ce{ClO3-}, and \ce{ClO4-}.
+\end{quote}
+
+To determine if a salt is acidic or basic look at the components:
+
+\begin{longtable}[]{@{}llr@{}}
+\toprule
+Cation & Anion & Salt\tabularnewline
+\midrule
+\endhead
+Strong Base & Strong Acid & Neutral\tabularnewline
+Strong Base & Weak Acid & Basic\tabularnewline
+Weak Base & Strong Acid & Acidic\tabularnewline
+Weak Base & Weak Acid & \(K_a\) vs \(K_b\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\paragraph{Buffers:}\label{buffers}
+
+Buffers are substances that resist change in pH. There are two types of
+buffers:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Weak acid + conjugate base, ex-\ce{HF} and \ce{F-}
+\end{enumerate}
+
+\begin{quote}
+\begin{quote}
+The weak acid neutralizes any base added and the conjugate base
+neutralizes acid.
+\end{quote}
+\end{quote}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Weak base + conjugate acid, ex-\ce{NH3} and \ce{NH4+}
+\end{enumerate}
+
+\begin{quote}
+\begin{quote}
+The weak base neutralizes any acid added and the conjugate acid
+neutralizes base.
+\end{quote}
+\end{quote}
+
+A common misconception is that a buffer can not be prepared with a
+strong base or acid, but if the weak counterpart is in excess then it
+will produce its conjugate while ultimately using all of the strong
+substance.
+
+To calculate the pH of a buffer, use ICE as if calculating the pH of a
+weak acid to determine \(K_a\). Left as an exercise to the reader.
+
+\newpage 
+
+It's unlikely that any reader did the aforementioned exercise, but the
+end result is the equation
+
+\begin{quote}
+\(K_a = x\dfrac{\text{\lbrack base\rbrack }}{\text{\lbrack acid\rbrack }}\),
+which written in logarithmic form yields\ldots{}
+\end{quote}
+
+The \textbf{Henderson-Hasselbalch equation}:
+\[\text{pH} = \text{p}K_a + \log{\dfrac{\ce{\lbrack A-\rbrack }}{\ce{\lbrack HA\rbrack }}},\]
+
+similarly,
+
+\[\ce{\lbrack OH-\rbrack } = K_b\times \dfrac{\ce{\lbrack B\rbrack }}{\ce{\lbrack HB+\rbrack }}\text{ and } \text{pOH}=\text{p}K_b + \log{\dfrac{\ce{\lbrack HB+\rbrack }}{\ce{\lbrack B\rbrack }}}.\]
+
+Buffer capacity is based on the amount of strong acid or base that a
+buffer can absorb without a large pH change. Generally a buffer is only
+functional within a range of a buffer is within 0.5 pH of the p\(K_a\)
+value.
+
+\paragraph{Titration:}\label{titration}
+
+A titration is a procedure used to determine the concentration of an
+unknown solution. An \textbf{indicator} is used to signal when the
+equivalence point, when the solution has reached a certain pH threshold,
+is reached. The component added is the \textbf{titrant}.
+
+A good rule of thumb is that strong acids have a pH less than two and
+strong bases have a pH greater than twelve. If a strong base is titrated
+with a weak acid or the converse then the equivalence point will be at 7
+pH. Otherwise, it's skewed towards the pH of the strong.
+
+\paragraph{Solubility}\label{solubility}
+
+There is not too much to this topic beyond the definition. However, when
+there are coefficients concentrations are exponential, as in all forms
+of equilibrium. As an example, \ce{MgF2} would have a constant of
+
+\begin{quote}
+\begin{quote}
+\(K_{sp} =\)\lbrack \ce{Mg^{2+}}\rbrack \lbrack \ce{F-}\rbrack \(^2\)
+\end{quote}
+\end{quote}
+
+\end{document}
