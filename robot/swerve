@@ -1,0 +1,33 @@
+#### resources
+FRC 484 (Swerve API)
+FRC 1640
+FRC 2910
+FRC 1323 (Not many resources, worth watching for tactics)
+FRC 2517
+Ether's Whitepaper: https://www.chiefdelphi.com/t/paper-4-wheel-independent-drive-independent-steering-swerve/107383  
+
+#### basics
+type of holonomic drive, holonomic meaning all degrees of freedom
+requires 8 motors, 4 to pivot, 4 to drive.
+traditionally four wheels, each of which can independently pivot and move.
+
+#### advantages
+agility: chassis orientation becomes irrelevant, can turn on point
+traction: full traction wheels due to pivot
+stealth: no need to broadcast intentions
+dynamic steering: [TODO: what is this] not necessary 1:1 drive mapping (agility foce multiplier)
+servicable: 5 minute module switch
+
+#### disadvantages
+thicc: given
+complexity: programming is a bitch, modules are not fun either
+time: requires a lot of CNC machining
+expensive: see prior
+straight lines: high precision required
+driver training: have to learn control
+
+
+#### inverse kinematics
+
+#### strats
+rotate on def for perpendicular
