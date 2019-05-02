@@ -1,6 +1,4 @@
 ---
-title: "Stokes Theorem"
-author: "Sasha Hydrie"
 geometry: margin=2cm
 header-includes: |
     \usepackage{esvect}
@@ -15,6 +13,8 @@ header-includes: |
 ---
 
 ## Calculus 3, Semester 2, Week 13: 
+
+\hfill{Sasha Hydrie}
 
 #### Stokes Theorem: 
 Let $S$ be an *oriented*, piecewise smooth surface, $\vv{F}$ a $C'$ vector field whose domain includes $S$, and $\delta S$ the positively oriented boundary of $S$, consisting of finitely many smooth curves. Then $$\oint_{\delta S} \vv{F}\cdot\,d\vv{s}=\iint_{S} \text{curl} \vv{F}\cdot\,d\vv{S}$$
