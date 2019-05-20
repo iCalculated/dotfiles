@@ -22,6 +22,10 @@ First four are driven by transfer of electrons, redox, and the final is driven b
 
 Key idea is that checmical reactions can create electricity and take place beause of electricity. Redox reactions since electrons are moving.
 
+A reaction is spontaneous if cell potential is positive. Remember OILRIG, LEOGER, or just that electrons lower charge (if you are an intelletual). PANC, positive anode negative cathode and An Ox Red Cat are useful as well. The salt bridge is usually \ce{NaNO3}. Simply add the potentials to calculate, remember it's intensive so scaling is not needed.
+
+$\Delta\text{G}=-nFE^\circ$.
+
 #### Terms
 
 - electricity: movement of electrons, often through something 
@@ -101,7 +105,8 @@ Weak A/B with conjugate salt, examples being \ce{HF} with \ce{NaF}.
 
 #### Gas
 
-Conditions of an ideal gas are low pressure, high temperature and low molar mass. Note that there is deviation from the ideal gas law if any conditions are not met. Gases dissolve better at lower temperature, while  solids dissolve better at high temperatures. A gas has more kinetic energy based on it's absolute temperature. Rate of effusion is dictated by square root of ratio, lower molar mass is faster.
+Conditions of an ideal gas are low pressure, high temperature and low molar mass. Note that there is deviation from the ideal gas law if any conditions are not met. Gases dissolve better at lower temperature, while  solids dissolve better at high temperatures. A gas has more kinetic energy based on it's absolute temperature. Rate of effusion is dictated by square root of ratio, lower molar mass is faster. Also, remember the relationship between pressure, volume and temperature, $PV/T$ stays consistent. 
+
 In general, whip out your ideal gas law, $PV=nRT$
 
 #### States of matter
@@ -120,8 +125,18 @@ Catalyst lowers activation energy. Intermediate is produced and then consumemd. 
 
 Rates are products over reactants to coefficient powers. Unit is $M^{1-\text{Order}}\text{sec}^{-1}$. Half life is a first order reaction is 0.693/k. The slowest step is rate determining. 
 
-#### Electrochemistry
+#### Equilibrium
 
-A reaction is spontaneous if cell potential is positive. Remember OILRIG, LEOGER, or just that electrons lower charge (if you are an intelletual). PANC, positive anode negative cathode and An Ox Red Cat are useful as well. The salt bridge is usually \ce{NaNO3}. Simply add the potentials to calculate, remember it's intensive so scaling is not needed.
+Equilbrium is when rates of reaction in each direction are the same. At that point amount of product and reactant stays constant. 
 
-$\Delta\text{G}=-nFE^\circ$.
+All various constants are in the form products over reactants.
+
+Le Chatelier's exists, generally be logical and think about what process would cause the change, and then invert.
+
+#### Acids and Bases
+
+If this comes up just accept that you are fucked. If you don't want to be fucked, remember your strong bases and acids.
+
+#### Descriptive 
+
+Color comes from d-shell, specifically if the shell is not full. 
