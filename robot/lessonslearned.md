@@ -7,8 +7,7 @@ geometry: margin=2cm
 
 #### Improvements:
 
-Sasha List:
-
+Sasha List: 
 - Swerve
 - Practice field
 - More schmoozing
