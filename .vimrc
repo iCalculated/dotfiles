@@ -1,4 +1,3 @@
-" settings
 set shiftwidth=4
 set expandtab 
 set noerrorbells
@@ -46,7 +45,6 @@ nnoremap ; :
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap <C-o> :NERDTreeToggle<CR>
-
 "obscene .vimrc binds
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
