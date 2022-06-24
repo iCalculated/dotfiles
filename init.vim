@@ -257,9 +257,6 @@ autocmd bufwritepost .init.vim source $MYVIMRC
 
 au Filetype markdown let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','$':'$','$$':'$$','```':'```','*':'*','**':'**'}
 
-" Caroline
-iabbrev crn Caroline
-
 "md folds
 au BufWrite,VimLeave *.md mkview
 au BufRead           *.md silent loadview
