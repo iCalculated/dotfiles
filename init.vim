@@ -1,422 +1,321 @@
-"gnvim magic
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-set rtp+=<SHARE_DIR>/merlin/vim
-
-let &packpath = &runtimepath
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-let g:palenight_terminal_italics=1
-
-
-"vimplug
-call plug#begin('~/.vim/plugged')
-  "Plug 'Shirk/vim-gas'
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
-  "Plug 'TaDaa/vimade'
-  "Plug 'airblade/vim-gitgutter'
-  "Plug 'airblade/vim-rooter'
-  "Plug 'codota/tabnine-vim'
-  "Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
-  "Plug 'dense-analysis/ale'
-  "Plug 'easymotion/vim-easymotion'
-  "Plug 'fszymanski/deoplete-emoji'
-  "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }  }
-  "Plug 'itchyny/lightline.vim'
-  "Plug 'joshdick/onedark.vim'
-  "Plug 'jpalardy/vim-slime', { 'branch':'main' }
-  "Plug 'kevinhwang91/rnvimr'
-  "Plug 'lervag/vimtex'
-  "Plug 'luochen1990/rainbow'
-  "Plug 'mg979/vim-visual-multi'
-  "Plug 'mhinz/vim-signify'
-  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  "Plug 'neovim/nvim-lsp'
-  "Plug 'sheerun/vim-polyglot'
-  "Plug 'sunaku/vim-shortcut'
-  "Plug 'tpope/vim-endwise'
-  "Plug 'tpope/vim-obsession'
-  "Plug 'universal-ctags/ctags'
-  "Plug 'vim-airline/vim-airline'
-  "Plug 'vim-airline/vim-airline-themes'
-  "Plug 'vim-pandoc/vim-pandoc'
-  "Plug 'vim-pandoc/vim-pandoc-syntax'
-  "Plug 'vim-syntastic/syntastic'
-  "Plug 'vim-utils/vim-man'
-  "Plug 'vlime/vlime'
-  "Plug 'voldikss/vim-floaterm'
-  "Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex'  }
-  Plug 'camspiers/lens.vim'
-  Plug 'drewtempelmeyer/palenight.vim'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'p00f/nvim-ts-rainbow'
-  Plug 'preservim/tagbar'
-  Plug 'reedes/vim-pencil'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'tommcdo/vim-lion'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
-call plug#end()
-
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    -- disable = { "c", "rust" },  -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = true,
-  },
-}
-
-require'nvim-treesitter.configs'.setup {
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    -- colors = {}, -- table of hex strings
-    -- termcolors = {} -- table of colour name strings
-  }
-}
-EOF
-"leader
-let mapleader = ","
-
-" AIRLINE
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|pandoc|org|rst|tex|text'
-"let g:airline#extensions#tabline#enabled = 0
-"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-"let g:airline_theme='gruvbox'
-"let g:airline#extensions#tmuxline#enabled = 0
-
-
-" VIM-JSBEAUTIFY
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-" GRUVBOX
-let g:gruvbox_termcolors=256
-let g:gruvbox_contrast_dark = 'medium'
-colorscheme gruvbox
-set background=dark
-
-" TABULAR & VIM-MARKDOWN
-let g:vim_markdown_folding_level = 1
-
-" VIM-PANDOC
-let g:pandoc#filetypes#handled = ['pandoc', 'markdown']
-let g:pandoc#modules#disabled = ['folding']
-let g:pandoc#folding#fold_fenced_codeblocks = 1
-let g:pandoc#folding#fold_yaml = 1
-let g:pandoc#biblio#bibs = ['/home/src/Knowledgebase/Zettelkasten/zettel.bib']
-let g:pandoc#toc#close_after_navigating = 0
-let g:pandoc#toc#position = 'bottom'
-let g:pandoc#folding#fdc = 0
-
-" RANGER
-"let g:rnvimr_ex_enable = 1
-"let g:rnvimr_enable_picker = 1
-"let g:rnvimr_layout = {
-"            \ 'relative': 'editor',
-"            \ 'width': float2nr(round(0.7 * &columns)),
-"            \ 'height': float2nr(round(0.7 * &lines)),
-"            \ 'col': float2nr(round(0.15 * &columns)),
-"            \ 'row': float2nr(round(0.15 * &lines)),
-"            \ 'style': 'minimal'
-"            \ }
-"nnoremap <silent> <leader>t :RnvimrToggle<CR>
-imap <c-c> <esc>
-vmap <c-c> <esc>
-
-" VIM-FLOATERM
-let g:floaterm_open_command = 'tabe'
-
-"" EASYMOTION
-"" <Leader>f{char} to move to {char}
-"map  <Leader>f <Plug>(easymotion-bd-f)
-"nmap <Leader>f <Plug>(easymotion-overwin-f)
-"
-"" s{char}{char} to move to {char}{char}
-"nmap s <Plug>(easymotion-overwin-f2)
-"
-"" Move to line
-"map <Leader>L <Plug>(easymotion-bd-jk)
-"nmap <Leader>L <Plug>(easymotion-overwin-line)
-"
-"" Move to word
-"map  <Leader>w <Plug>(easymotion-bd-w)
-"nmap <Leader>w <Plug>(easymotion-overwin-w)" "
-
-"settings
-set termguicolors
-set updatetime=100  " swap file write time
 set mouse=a
-set shiftwidth=2    " tab = 2 spaces
-set splitright      " split sanity
+set termguicolors
+set shiftwidth=4
+set expandtab
+set noerrorbells
+set showmode
+set showcmd
+set splitright
 set splitbelow
-set sessionoptions+=tabpages,globals
-set expandtab       " expand tabs into spaces
-set number          " line numbers
-set noswapfile      " disable backups
+set nu
+set noswapfile
 set nobackup
 set nowritebackup
-set autowrite       " write when time-traveling
-set autoread        " check if open file changed
-set noruler         " cursor position
-set nocursorline    " mark cursor line
-set lazyredraw      " faster macros
-set hidden          " hidden buffers
+set autowrite
+set autoread
+set ruler
+set ttyfast
+set nocursorcolumn
+set nocursorline
+set wrap
+set conceallevel=2
+set lazyredraw
 
 "programming rules
 set autoindent
 set smarttab
 set showmatch
-set completeopt=longest,menuone
 
 "search rules
 set hlsearch
 set ignorecase
 set smartcase
+set swb=usetab,newtab "uselast?
 
-function! ProseMode()
-  call goyo#execute(0, [])
-  set spell noci nosi noai nolist noshowmode noshowcmd
-  set complete+=s
-  set bg=light
-  "colo PaperColor
-endfunction
-command! ProseMode call ProseMode()
-
-" toggle transparency
-let t:is_transparent = 0
-"hi Normal guibg=NONE ctermbg=NONE
-"hi TabLine guibg=NONE ctermbg=NONE cterm=NONE
-"hi TabLineSel guibg=NONE ctermbg=NONE cterm=underline
-"hi TabLineFill guibg=NONE ctermbg=NONE
-"hi StatusLine guibg=NONE ctermbg=NONE cterm=NONE
-function! Toggle_transparent()
-    if t:is_transparent == 0
-        hi Normal guibg=NONE ctermbg=NONE
-        hi TabLine guibg=NONE ctermbg=NONE cterm=NONE
-        hi TabLineSel guibg=NONE ctermbg=NONE cterm=underline
-        hi TabLineFill guibg=NONE ctermbg=NONE
-        hi StatusLine guibg=NONE ctermbg=NONE cterm=NONE
-        let t:is_transparent = 1
-    else
-        set background=dark
-        let t:is_transparent = 0
-    endif
-endfunction
-command! Transparent call Toggle_transparent()
-
-"todo
-nnoremap <leader>a :g:\[[xX]\]:m$<CR>``:noh<CR>
-"nnoremap <leader>d ma:g:\[[xX]\]:m$<CR>ggnk"=strftime('%F')<CR>PVG:w! >> archive.md<CR>VGd`a:noh<CR>
-"nnoremap <leader>s V:w! >> archive.md<CR>dd
-nnoremap <leader>n gg/- <CR>:noh<CR>O- [ ]
-nnoremap <leader>x V:s:\[ \]:[X]<CR>:noh<CR>
+"key sets
+let mapleader = " "
+nnoremap <space> <nop>
 
 "speedrunning
-nnoremap <space> zz
 nnoremap ; :
 nnoremap n nzzzv
 nnoremap N Nzzzv
-nnoremap <silent><C-t> :tabnew<CR>
 
-"obscene .vimrc binds
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>z [sz=1<cr>A
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>v :tabe $MYVIMRC<cr>
-autocmd bufwritepost .vimrc source $MYVIMRC
-autocmd bufwritepost .init.vim source $MYVIMRC
+nnoremap <leader>v :e $MYVIMRC<cr>
 
-au Filetype markdown let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','$':'$','$$':'$$','```':'```','*':'*','**':'**'}
+nnoremap <Leader><Leader> :Telescope<cr>
+nnoremap <Leader>fc :Telescope commands<cr>
+nnoremap <Leader>ff :Telescope find_files<cr>
+nnoremap <Leader>fg :Telescope git_files<cr>
+nnoremap <Leader>fm :Telescope marks<cr>
+nnoremap <Leader>fb :Telescope buffers<cr>
+nnoremap <Leader>fB :Telescope file_browser<cr>
+nnoremap <Leader>fh :Telescope help_tags<cr>
+nnoremap <Leader>fM :Telescope man_pages<cr>
+nnoremap <Leader>/ :Telescope current_buffer_fuzzy_find<cr>
+nnoremap <Leader>? :Telescope live_grep<cr>
+nnoremap <Leader>ze :Telescope spell_suggest<cr>
+nnoremap <Leader>w <C-w>
 
-"md folds
-au BufWrite,VimLeave *.md mkview
-au BufRead           *.md silent loadview
+tnoremap <Esc> <C-\><C-n>
+lua << EOF
+require('plugins')
 
-"FZF gitfiles
-nnoremap <silent><leader>q :GFiles<CR>
-nnoremap <silent><C-p> :GFiles<CR>
-nnoremap <silent><leader>l :Windows<CR>
-nnoremap <silent><leader>r :Rg<CR>
-nnoremap <silent><C-s> :Rg<CR>
+local mason = require('mason').setup()
+local masonlsp = require("mason-lspconfig").setup()
 
-  " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+local telescope = require('telescope')
+local trouble = require('trouble').setup()
+telescope.setup {
+    defaults = {
+        theme = "ivy",
+        layout_config = { height=0.8, width=0.8 },
+    },
+    extensions = {
+        file_browser = {
+            theme = "dropdown",
+            hijack_netrw = true
+        },
+    },
+    pickers = {
+        buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            theme = "dropdown",
+            previewer = false,
+            mappings = {
+                i = {
+                  ["<c-d>"] = "delete_buffer",
+                }
+            }
+        }
+    }
+}
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
 
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+require("gruvbox").setup({
+  contrast = "soft", -- can be "hard", "soft" or empty string
+})
 
-let g:matlab_auto_mappings = 1
-let g:matlab_server_launcher = 'tmux'
+require('mini.comment').setup()
 
-let g:slime_target = "neovim"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+require('mini.cursorword').setup({
+  -- Delay (in ms) between when cursor moved and when highlighting appeared
+  delay = 100,
+})
 
-" "coc
-" set shortmess+=c
-"
-"
-" if has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
-"
-" " Use tab for trigger completion with characters ahead and navigate.
-" " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" " other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-"
-" " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-"
-" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" " position. Coc only does snippet and additional edit on confirm.
-" " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-" if exists('*complete_info')
-"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-" else
-"   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" endif
-"
-" " Use `[g` and `]g` to navigate diagnostics
-" " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-"
-" " GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-"
-" " Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-"
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-"
-" " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-"
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-"
-" " Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-"
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-"
-" " Applying codeAction to the selected region.
-" " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-"
-" " Remap keys for applying codeAction to the current buffer.
-" nmap <leader>ac  <Plug>(coc-codeaction)
-" " Apply AutoFix to problem on the current line.
-" nmap <leader>qf  <Plug>(coc-fix-current)
-"
-" " Map function and class text objects
-" " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-" xmap if <Plug>(coc-funcobj-i)
-" omap if <Plug>(coc-funcobj-i)
-" xmap af <Plug>(coc-funcobj-a)
-" omap af <Plug>(coc-funcobj-a)
-" xmap ic <Plug>(coc-classobj-i)
-" omap ic <Plug>(coc-classobj-i)
-" xmap ac <Plug>(coc-classobj-a)
-" omap ac <Plug>(coc-classobj-a)
-"
-" " Use CTRL-S for selections ranges.
-" " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-" nmap <silent> <C-s> <Plug>(coc-range-select)
-" xmap <silent> <C-s> <Plug>(coc-range-select)
-"
-" " Add `:Format` command to format current buffer.
-" command! -nargs=0 Format :call CocAction('format')
-"
-" " Add `:Fold` command to fold current buffer.
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-"
-" " Add `:OR` command for organize imports of the current buffer.
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-"
-" " Add (Neo)Vim's native statusline support.
-" " NOTE: Please see `:h coc-status` for integrations with external plugins that
-" " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-"
-" " Mappings for CoCList
-" " Show all diagnostics.
-" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions.
-" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands.
-" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document.
-" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols.
-" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list.
-" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-"
+require('mini.indentscope').setup({
+  draw = { delay = 0, animation = require('mini.indentscope').gen_animation('none') },
+  options = { try_as_border = true, },
+  symbol = '|',
+})
 
+require('mini.pairs').setup()
+require('mini.sessions').setup({
+  directory = '~/sessions', --<"session" subdir of user data directory from |stdpath()|>,
+  file = "",
+  pre = { read = close_bad_buffers, write = close_bad_buffers, },
+})
+require('mini.starter').setup()
+require('mini.statusline').setup()
+require('mini.surround').setup({
+  mappings = {
+    add = 'sa', -- Add surrounding in Normal and Visual modes
+    delete = 'sd', -- Delete surrounding
+    find = 'sf', -- Find surrounding (to the right)
+    find_left = 'sF', -- Find surrounding (to the left)
+    highlight = 'sh', -- Highlight surrounding
+    replace = 'sr', -- Replace surrounding
+    update_n_lines = 'sn', -- Update `n_lines`
+  },
+})
+
+require('mini.tabline').setup()
+
+-- Close buffers that don't restore from a session
+local close_bad_buffers = function()
+    vim.notify.dismiss({ silent = true, pending = true })
+    local buffer_numbers = vapi.nvim_list_bufs()
+    for _, buffer_number in pairs(buffer_numbers) do
+        -- local buffer_name = vapi.nvim_buf_get_name(buffer_number)
+        local buffer_type = vapi.nvim_buf_get_option(buffer_number, "buftype")
+        local is_modifiable = vapi.nvim_buf_get_option(buffer_number, "modifiable")
+        if buffer_type ~= "terminal" and (buffer_type == "nofile" or not is_modifiable) then
+            vapi.nvim_buf_delete(buffer_number, { force = true })
+        end
+    end
+end
+
+vim.keymap.set("n", "<Leader>ss",
+        function()
+            if vim.v.this_session and vim.v.this_session ~= "" then
+                sessions.write()
+            else
+                vim.ui.input({ prompt = "Session Name to Save: " }, function(input)
+                    if input and input ~= "" then
+                        sessions.write(vim.fn.trim(input))
+                    else
+                        vim.notify("Please Give a Name!")
+                    end
+                end)
+            end
+        end
+)
+
+local null_ls = require('null-ls')
+
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+
+-- TODO: async formatting
+null_ls.setup({
+    sources = {
+        formatting.stylua,
+        formatting.black,
+        formatting.prettierd,
+        formatting.google_java_format,
+        diagnostics.eslint,
+        diagnostics.flake8
+    },
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({bufnr = bufnr})
+                end,
+            })
+        end
+    end,
+})
+
+local cmp = require'cmp'
+
+cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+    }, {
+      { name = 'buffer' },
+    })
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['pylsp'].setup {
+    capabilities = capabilities,
+    on_attach = function()
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})  
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})  
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})  
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})  
+    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, {buffer=0})  
+    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, {buffer=0})  
+    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, {buffer=0})
+    vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer=0})  
+    end
+}
+
+require('lspconfig')['jdtls'].setup {
+    capabilities = capabilities,
+    on_attach = function()
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})  
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})  
+    --vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})  
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})  
+    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, {buffer=0})  
+    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, {buffer=0})  
+    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, {buffer=0})
+    vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer=0})  
+    end
+}
+
+
+--[[
+whichkey.register({
+    ["<Leader>ss"] = {
+        "(s)ession (s)ave <Session Name>",
+    },
+    ["<Leader>sS"] = {
+        function()
+            vim.ui.input({ prompt = "Session Name to Save: " }, function(input)
+                if input and input ~= "" then
+                    sessions.write(vim.fn.trim(input))
+                else
+                    vim.notify("Please Give a Name!")
+                end
+            end)
+        end,
+        "(s)ession (S)ave"
+    },
+    ["<Leader>sl"] = {
+        function()
+            sessions.select()
+        end,
+        "(s)ession (l)oad <Session Name>",
+    },
+    ["<Leader>sq"] = {
+        function()
+            vim.api.nvim_set_vvar("this_session", "")
+            vim.notfiy("You have eft the session")
+        end,
+        "(s)ession (q)uit",
+    },
+}, { silent = false })
+]]
+
+
+require('meliora').setup()
+
+EOF
+
+colorscheme meliora
+hi Conceal guifg=None
+hi Normal guibg=NONE
+hi NormalNC guibg=NONE
+hi NormalFloat guibg=NONE
+hi LineNr guibg=NONE
+hi VertSplit guibg=NONE
+hi TelescopeSelection guifg=#cccccc
+hi TelescopeCaret guifg=#cccccc
+
+augroup hide_symbols
+  autocmd!
+  autocmd VimEnter * call matchadd('Conceal', 'TODO', 10, 100, {'conceal': 'λ'})
+  autocmd VimEnter * hi! link Conceal TODO
+augroup end
+
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+
+augroup source_vimrc
+  autocmd!
+  autocmd bufwritepost init.vim source $MYVIMRC
+augroup end
+
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END
