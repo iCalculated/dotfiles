@@ -1,13 +1,22 @@
 set fish_greeting ""
+
+fish_vi_key_bindings
+
 set -gx PATH "$HOME/.cargo/bin" $PATH
-set -gx PATH "/home/linuxbrew/.linuxbrew/bin" $PATH
-set -gx PATH "/fufa/.local/bin" $PATH
-set -gx PATH "home/fufa/.local/bin" $PATH
-set -gx PLEASE "test"
+set -gx PATH "/opt/homebrew/bin" $PATH
+set -gx PATH "$ANDROID_HOME/cmdline-tools/latest/bin" $PATH
+set -gx PATH "/Users/shy/.nvm/versions/node/v20.11.1/bin" $PATH
+set -x GOPATH "$HOME/go"
+set -gx JAVA_HOME "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home"
 
-set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 
-
-source /opt/ros/noetic/share/rosbash/rosfish
+status is-interactive; and pyenv init --path | source
+pyenv init - | source
 
 starship init fish | source
 
+# opam configuration
+source /Users/shy/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+fish_ssh_agent
