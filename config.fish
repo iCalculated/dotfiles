@@ -20,3 +20,6 @@ source /Users/shy/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 fish_ssh_agent
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/shy/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/shy/Downloads/google-cloud-sdk/path.fish.inc'; end
