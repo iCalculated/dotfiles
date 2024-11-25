@@ -7,6 +7,7 @@ set -gx PATH "/opt/homebrew/bin" $PATH
 set -gx PATH "$ANDROID_HOME/cmdline-tools/latest/bin" $PATH
 set -gx PATH "/Users/shy/.nvm/versions/node/v20.11.1/bin" $PATH
 set -x GOPATH "$HOME/go"
+set -x EDITOR "nvim"
 set -gx JAVA_HOME "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home"
 
 status is-interactive; and pyenv init --path | source
