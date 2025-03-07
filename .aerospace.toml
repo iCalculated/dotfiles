@@ -92,6 +92,10 @@ if.app-id = 'com.1password.1password'
 run = 'move-node-to-workspace D'
 
 [[on-window-detected]] 
+if.app-id = 'com.spotify.client' 
+run = 'move-node-to-workspace D'
+
+[[on-window-detected]] 
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace D'
 
@@ -99,14 +103,3 @@ run = 'move-node-to-workspace D'
 if.app-name-regex-substring = 'orbstack' 
 run = 'move-node-to-workspace D'
 
-[[on-window-detected]] 
-if.app-id = 'com.apple.MobileSMS'
-run = 'move-node-to-workspace D'
-
-[[on-window-detected]] 
-if.app-name-regex-substring = 'discord' 
-run = 'move-node-to-workspace D'
-
-[[on-window-detected]] 
-if.app-id = 'com.spotify.client' 
-run = 'move-node-to-workspace Q'
