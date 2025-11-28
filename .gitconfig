@@ -1,0 +1,26 @@
+[alias]
+	s = status
+	co = checkout
+	br = branch
+	history = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	todo = grep TODO
+[user]
+	name = iCalculated
+	email = fufa0001@gmail.com
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[core]
+	excludesfile = /Users/shy/.gitignore
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default

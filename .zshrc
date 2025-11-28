@@ -1,113 +1,179 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# ============================================================
+# Powerlevel10k Instant Prompt (MUST BE AT TOP)
+# ============================================================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# ============================================================
+# ZSH Configuration
+# ============================================================
 
-case $(uname -a) in
-   *Microsoft*) unsetopt BG_NICE ;;
-esac
-# eval 'dircolors ~/dircolors-solarized/dircolors.256dark'
-export ZSH="/home/ahydrie/.oh-my-zsh"
+# ------------------------------------------------------------
+# Vi Mode
+# ------------------------------------------------------------
+bindkey -v
+export KEYTIMEOUT=1
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+bindkey '^?' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Cursor shape: beam for insert, block for normal
+if [[ $- == *i* ]]; then
+    function zle-keymap-select zle-line-init {
+        case $KEYMAP in
+            vicmd)      echo -ne '\e[2 q' ;;
+            viins|main) echo -ne '\e[6 q' ;;
+        esac
+    }
+    zle -N zle-keymap-select
+    zle -N zle-line-init
+    echo -ne '\e[6 q'
+fi
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Edit command in nvim (v in normal mode)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Double-tap Esc for sudo
+sudo-command-line() {
+    [[ -z $BUFFER ]] && BUFFER=$(fc -ln -1)
+    BUFFER="sudo $BUFFER"
+    zle end-of-line
+}
+zle -N sudo-command-line
+bindkey '\e\e' sudo-command-line
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# ------------------------------------------------------------
+# Environment Variables & PATH
+# ------------------------------------------------------------
+export GOPATH="$HOME/go"
+export EDITOR="nvim"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v20.11.1/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+. "$HOME/.local/bin/env"
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# ------------------------------------------------------------
+# SSH Agent (fast version)
+# ------------------------------------------------------------
+_ssh_env="$HOME/.ssh/environment"
+[[ -z "$SSH_AGENT_PID" && -f "$_ssh_env" ]] && source "$_ssh_env" > /dev/null
+if [[ -z "$SSH_AGENT_PID" ]] || ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
+    ssh-agent -s | sed 's/^echo/#echo/' > "$_ssh_env"
+    chmod 600 "$_ssh_env"
+    source "$_ssh_env" > /dev/null
+fi
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# ------------------------------------------------------------
+# pyenv (lazy-loaded on first use)
+# ------------------------------------------------------------
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+pyenv() {
+    unfunction pyenv 2>/dev/null
+    eval "$(command pyenv init --path)"
+    eval "$(command pyenv init -)"
+    pyenv "$@"
+}
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# ------------------------------------------------------------
+# opam (OCaml)
+# ------------------------------------------------------------
+[[ -f "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2>&1
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# ------------------------------------------------------------
+# Conda (lazy-loaded on first use)
+# ------------------------------------------------------------
+conda() {
+    unfunction conda 2>/dev/null
+    __conda_setup="$('/Users/shy/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [[ $? -eq 0 ]]; then
+        eval "$__conda_setup"
+    else
+        if [[ -f "/Users/shy/opt/miniconda3/etc/profile.d/conda.sh" ]]; then
+            . "/Users/shy/opt/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/shy/opt/miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    conda "$@"
+}
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# ------------------------------------------------------------
+# Aliases
+# ------------------------------------------------------------
+alias ls='eza'
+alias ll='eza -la'
+alias la='eza -a'
+alias lt='eza --tree'
+alias cat='bat'
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# ------------------------------------------------------------
+# Powerlevel10k Theme
+# ------------------------------------------------------------
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# ------------------------------------------------------------
+# Completions (cached)
+# ------------------------------------------------------------
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git
-        z)
+# ------------------------------------------------------------
+# History
+# ------------------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE INC_APPEND_HISTORY
 
-source $ZSH/oh-my-zsh.sh
+# ------------------------------------------------------------
+# Zoxide (smarter cd)
+# ------------------------------------------------------------
+eval "$(zoxide init zsh)"
 
-# User configuration
+# ------------------------------------------------------------
+# fzf (fuzzy finder)
+# ------------------------------------------------------------
+source <(fzf --zsh)
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# ------------------------------------------------------------
+# Colored man pages
+# ------------------------------------------------------------
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# ------------------------------------------------------------
+# Atuin (better shell history)
+# ------------------------------------------------------------
+eval "$(atuin init zsh)"
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# ------------------------------------------------------------
+# Syntax Highlighting & Autosuggestions (must be near end)
+# ------------------------------------------------------------
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
