@@ -1,0 +1,52 @@
+return require("packer").startup(function(use)
+	use("wbthomason/packer.nvim")
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+	use("echasnovski/mini.nvim")
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use("nvim-telescope/telescope-file-browser.nvim")
+	use("nvim-telescope/telescope-ui-select.nvim")
+	use("ellisonleao/gruvbox.nvim")
+	use({
+		"meliora-theme/neovim",
+		requires = { "rktjmp/lush.nvim" },
+	})
+	use({ "nyoom-engineering/oxocarbon.nvim" })
+
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/nvim-cmp")
+
+	--use("ggandor/leap.nvim")
+	use("L3MON4D3/LuaSnip")
+	use("saadparwaiz1/cmp_luasnip")
+
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
+	use("neovim/nvim-lspconfig")
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+	})
+	use("mhartington/formatter.nvim")
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
+	use("nvim-treesitter/nvim-treesitter")
+
+	-- Clojure
+	--use("tpope/vim-dispatch")
+	--use("clojure-vim/vim-jack-in")
+	--use("radenling/vim-dispatch-neovim")
+	--use("Olical/conjure")
+
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+	use("github/copilot.vim")
+end)
